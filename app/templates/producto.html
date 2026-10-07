@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Producto {{idProducto}}</h1>
+    <ul>
+        <li>Nombre: <strong>{{producto.nombre}}</strong></li>
+        <li>Precio: <strong>{{producto.precio}}</strong></li>
+        <li>Disponible: {% if producto.disponible %}<span style="color: green">En stock</span>
+            {% else %}<span style="color: red">Agotado</span>{% endif %}</li>
+    </ul>
+    <p>Esta es la página de inicio de mi aplicación.</p>
+{% endblock %}
+{% block title %}Inicio{% endblock %}
