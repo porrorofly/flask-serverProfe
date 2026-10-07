@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Catalogo de Productos</h1>
+    <p>Este es el catálogo de nuestros productos.</p>
+    <ul>
+        <li>Producto 1</li>
+        <li>Producto 2</li>
+        <li>Producto 3</li>
+    </ul>
+    <h2>Nombre pasado desde Flask: {{ nombre }}</h2>
+    <h2>ID del producto pasado desde Flask: {{ id_producto }}</h2>
+    <ul>
+        {% for producto in listaDeproductos %}
+            <li>
+                <strong>Nombre:</strong> {{ producto.nombre }}<br>
+                <strong>Precio:</strong> ${{ producto.precio }}<br>
+                <strong>Stock:</strong> {{ producto.stock }}<br>
+                <strong>Disponible:</strong> 
+                {% if producto.disponible %}<span style="color: green">En stock</span>{% else %}<span style="color: red">Agotado</span>{% endif %}
+                
+            </li>
+        {% endfor %}
+    </ul>
+    
+</body>
+</html>

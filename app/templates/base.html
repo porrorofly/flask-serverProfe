@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mi App{% endblock %}</title>
+</head>
+<body>
+    <header>
+
+        <h1>Esta es la cabecera de mi aplicación</h1>
+        <hr/>
+        <nav>
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/saludo/amigo">Saludo</a></li>
+                <li><a href="/catalogo/1">Catálogo</a></li>
+            </ul>
+    </header>
+    <main>
+    <h1>Contenido de mi página</h1>
+    {% block content %}
+    {% endblock %}
+    </main>
+    <footer>
+        <hr/>
+        <p>2026&copy; Mi Aplicación. Todos los derechos reservados.</p>
+</body>
+</html>
