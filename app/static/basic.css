@@ -1,0 +1,136 @@
+:root {
+    --primary: #3b82f6;
+    --primary-dark: #1d4ed8;
+    --secondary: #0f172a;
+    --surface: #ffffff;
+    --surface-soft: #f8fafc;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --shadow: rgba(15, 23, 42, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);
+    color: var(--text);
+}
+
+.container {
+    width: min(1100px, 90vw);
+    margin: 0 auto;
+}
+
+.site-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px var(--shadow);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.25rem 0;
+}
+
+.site-header h1 {
+    margin: 0;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+}
+
+.site-nav ul {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.site-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    transition: background-color 0.2s ease;
+}
+
+.site-nav a:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.page-content {
+    padding: 2rem 0 3rem;
+}
+
+.card {
+    background: var(--surface);
+    border-radius: 18px;
+    box-shadow: 0 12px 30px var(--shadow);
+    padding: 2rem;
+}
+
+h1, h2, h3 {
+    color: var(--secondary);
+}
+
+p {
+    line-height: 1.6;
+}
+
+.product-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.product-list li {
+    background: var(--surface-soft);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.product-list strong {
+    color: var(--secondary);
+}
+
+.status-ok {
+    color: var(--success);
+    font-weight: 700;
+}
+
+.status-no {
+    color: var(--danger);
+    font-weight: 700;
+}
+
+.site-footer {
+    background: var(--secondary);
+    color: #e2e8f0;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+@media (max-width: 640px) {
+    .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .card {
+        padding: 1.25rem;
+    }
+}
