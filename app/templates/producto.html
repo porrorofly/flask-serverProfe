@@ -17,4 +17,12 @@
             </li>
         </ul>
     </section>
+
+    <ul>
+        <li>
+            <a href="{{ url_for('producto', idproducto=idproducto + 1) }}">
+                Siguiente producto &rarr;
+            </a>
+        </li>
+    </ul>
 {% endblock %}

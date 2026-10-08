@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block content %}
+    <h1>Formulario de Contacto</h1>
+
+    <!-- Si dejamos action vacío, se envía a la misma URL actual -->
+    <form action="" method="get">
+        <p>Filtrar por precio</p>
+        <p>
+            <label for="precio_min">Precio minimo</label>
+            <input type="number" id="precio_min" name="precio_min">
+        </p>
+        <p><input type="submit" value="Filrar"></input></p>
+    </form>
+{% endblock %}

@@ -1,5 +1,5 @@
 from data.productos import productos
-from flask import Flask,render_template 
+from flask import Flask,render_template ,request
 
 # Inicializamos la aplicación
 app = Flask(__name__)
@@ -31,6 +31,28 @@ def catalogo():
 def producto(idproducto):
     return render_template("producto.html",idproducto=idproducto,producto=productos[idproducto])
     # Aquí podrías tener lógica para obtener datos de un catálogo, por ahora solo devolvemos un mensaje
+@app.route("/contacto",methods=["GET"])
+def contacto():
+        return render_template('contacto.html')
+@app.route("/contacto",methods=["POST"])
+def contacto_post():
+     nombre=request.form.get("nombre")
+     mensaje=request.form.get("mensaje")
+     return render_template("/contacto-data.html",nombre=nombre,mensaje=mensaje)
+@app.route("/filtrar")
+def filtrar():
+     return render_template("filtrar.html")
+@app.route("/filtrar-data",methods=["GET"])
+def filtrar_data():
+     precio_min=request.args.get("precio_min",type=float)
+     precio_max=request.args.get("precio_max",type=float)
+     productos_filtrados=[
+          producto 
+          for producto 
+          in productos 
+          if precio_min<= producto["precio"] <=precio_max
+     ]
+     return render_template("catalogo.html", nombre="filtrado",listaDeproductos=productos_filtrados)
 if __name__ == "__main__":
     # host='0.0.0.0' es VITAL en Docker para que el servidor sea accesible desde fuera del contenedor
     # debug=True hará que el servidor se reinicie automáticamente si cambias este archivo
