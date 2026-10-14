@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Last of Us Part II - 404 Not Found</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #07090b; /* Fondo oscuro base del juego */
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- VENTANA HECHA COMPLETAMENTE CON CSS (Sin imágenes externas) --- */
+        .window-container {
+            position: absolute;
+            right: 8%;
+            bottom: 0;
+            width: 40vw;
+            height: 85vh;
+            z-index: 1;
+            display: flex;
+            gap: 15px;
+            opacity: 0.25; /* Luz ambiental suave */
+            mask-image: linear-gradient(to top, black 70%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to top, black 70%, transparent 100%);
+        }
+
+        /* Los dos paneles de la ventana abandonada */
+        .window-pane {
+            flex: 1;
+            background: linear-gradient(to bottom, rgba(140, 160, 130, 0.4), rgba(7, 9, 11, 0));
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-bottom: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efecto de enredaderas/maleza trepando por el cristal */
+        .window-pane::before {
+            content: "";
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 60%;
+            background: radial-gradient(ellipse at bottom, rgba(34, 48, 30, 0.8), transparent 70%);
+        }
+
+        /* Haz de luz diagonal simulando el atardecer/neblina */
+        .light-beam {
+            position: absolute;
+            right: 0;
+            top: -20%;
+            width: 60vw;
+            height: 140vh;
+            background: linear-gradient(135deg, rgba(210, 225, 200, 0.08) 0%, rgba(0,0,0,0) 60%);
+            transform: rotate(-15deg);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* --- EFECTO PARTICULADO (Esporas/Polvo en suspensión) --- */
+        .dust-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(230, 240, 210, 0.25);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: drift var(--d) infinite ease-in-out;
+            bottom: -20px;
+        }
+
+        @keyframes drift {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            20% { opacity: 0.5; }
+            80% { opacity: 0.5; }
+            100% { transform: translateY(-110vh) translateX(var(--x)); opacity: 0; }
+        }
+
+        /* --- INTERFAZ DE USUARIO (Lado izquierdo) --- */
+        .ui-container {
+            position: relative;
+            z-index: 3;
+            margin-left: 8%;
+            max-width: 500px;
+            padding: 20px;
+        }
+
+        .brand-header {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            color: rgba(255, 255, 255, 0.35);
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .error-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .error-sub {
+            font-size: 4rem;
+            font-weight: 200;
+            color: rgba(255, 255, 255, 0.15);
+            line-height: 1;
+            margin-bottom: 25px;
+            font-family: Georgia, serif;
+        }
+
+        .description {
+            color: #929598;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 50px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(255,255,255,0.1);
+        }
+
+        /* --- BOTONES DEL MENÚ --- */
+        .nav-list {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 18px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #8c8f93;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        /* Línea interactiva original del juego al pasar el cursor */
+        .nav-link::before {
+            content: "";
+            width: 0;
+            height: 1.5px;
+            background-color: #ffffff;
+            margin-right: 0;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+        }
+
+        .nav-link:hover::before {
+            width: 25px;
+            margin-right: 15px;
+            opacity: 1;
+        }
+
+        /* HUD inferior decorativo */
+        .footer-hud {
+            position: absolute;
+            bottom: 40px;
+            left: 8%;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.15);
+            z-index: 3;
+        }        /* --- ОКНО С ПОДЧЕРКНУТОЙ СТРУКТУРОЙ --- */
+        .window-container {
+            position: absolute;
+            right: 8%;
+            bottom: 0;
+            width: 40vw;
+            height: 85vh;
+            z-index: 1;
+            display: flex;
+            gap: 15px;
+            opacity: 0.55; /* Увеличили видимость с 0.25 до 0.55 */
+            mask-image: linear-gradient(to top, black 70%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to top, black 70%, transparent 100%);
+        }
+
+        /* Панели окна теперь имеют более четкие границы и внутреннее свечение */
+        .window-pane {
+            flex: 1;
+            background: linear-gradient(to bottom, rgba(150, 180, 140, 0.5), rgba(7, 9, 11, 0));
+            border: 2px solid rgba(255, 255, 255, 0.25); /* Сделали рамы ярче */
+            border-bottom: none;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(150, 180, 140, 0.2);
+        }
+
+        /* Растительность у основания окна стала плотнее */
+        .window-pane::before {
+            content: "";
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 60%;
+            background: radial-gradient(ellipse at bottom, rgba(54, 78, 48, 0.9), transparent 70%);
+        }
+
+        /* --- БОЛЕЕ ЯРКИЙ ЛУЧ СВЕТА И ТУМАН --- */
+        .light-beam {
+            position: absolute;
+            right: 0;
+            top: -20%;
+            width: 65vw;
+            height: 140vh;
+            /* Сделали начальную точку света заметнее (0.2) и расширили зону свечения до 70% */
+            background: linear-gradient(135deg, rgba(220, 240, 205, 0.2) 0%, rgba(220, 240, 205, 0.05) 30%, rgba(0,0,0,0) 70%);
+            transform: rotate(-15deg);
+            z-index: 1;
+            pointer-events: none;
+            filter: blur(10px); /* Мягкое рассеивание света */
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Estructura geométrica de la ventana y el haz de luz ambiental -->
+    <div class="light-beam"></div>
+    <div class="window-container">
+        <div class="window-pane"></div>
+        <div class="window-pane"></div>
+    </div>
+
+    <!-- Partículas flotantes activas -->
+    <div class="dust-container">
+        <div class="particle" style="--d: 12s; --x: 60px; width: 4px; height: 4px; left: 65%;"></div>
+        <div class="particle" style="--d: 18s; --x: -40px; width: 3px; height: 3px; left: 80%;"></div>
+        <div class="particle" style="--d: 15s; --x: 80px; width: 5px; height: 5px; left: 55%;"></div>
+        <div class="particle" style="--d: 20s; --x: -70px; width: 2px; height: 2px; left: 90%;"></div>
+    </div>
+
+    <!-- Interfaz de Navegación -->
+    <div class="ui-container">
+        <div class="brand-header">The Last of Us Part II</div>
+        
+        <div class="error-title">Área No Mapeada</div>
+        <div class="error-sub">404</div>
+        
+        <p class="description">
+            Has llegado al límite del escenario accesible. El servidor no puede leer el archivo solicitado. Comprueba la dirección URL o regresa antes de que caiga la noche.
+        </p>
+        
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a href="/" class="nav-link">Volver al Menú Principal</a>
+            </li>
+            <li class="nav-item">
+                <a href="javascript:history.back()" class="nav-link">Regresar a Zona Segura</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="footer-hud">
+        Partida Guardada • Servidor Local Activo
+    </div>
+
+</body>
+</html>
